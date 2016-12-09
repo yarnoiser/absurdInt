@@ -14,19 +14,52 @@ public class AbsurdInt{
 	}
 
 	public UInt64 ToULong(){
-		UInt64 result = 0;
-		foreach (var digit in digits) {
-			if (result == 0) {
-				result = digit;
-			} else {
-				result *= digit;
-			}
-		}
-		return result;
+		return digits [0];
 	}
 
-	public UInt64 Base(){
+	public UInt64 GetDigetMax(){
 		return UInt64.MaxValue;
+	}
+
+	public List<UInt64> GetDigets(){
+		return new List<UInt64> (digits);
+	}
+
+	public bool EqualTo(AbsurdInt comp){
+		if (digits.Count != comp.digits.Count) {
+			return false;
+		}
+		for (int i = 0; i < digits.Count; i++) {
+			if (digits [i] != comp.digits [i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public bool LessThan(AbsurdInt comp){
+		if (digits.Count < comp.digits.Count) {
+			return true;
+		}
+		if (digits.Count > comp.digits.Count) {
+			return false;
+		}
+		for (int i = digits.Count - 1; i >= 0; i--) {
+			if (digits [i] < comp.digits [i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public bool GreaterThan(AbsurdInt comp){
+		if (this.LessThan (comp)) {
+			return false;
+		}
+		if (this.EqualTo (comp)) {
+			return false;
+		}
+		return true;
 	}
 }
 
