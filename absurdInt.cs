@@ -13,15 +13,19 @@ public class AbsurdInt{
 		digits.Add (num);
 	}
 
+	public AbsurdInt(IEnumerable<UInt64> digits){
+		this.digits = new List<UInt64>(digits);
+	}
+
 	public UInt64 ToULong(){
 		return digits [0];
 	}
 
-	public UInt64 GetDigetMax(){
+	public UInt64 GetDigitMax(){
 		return UInt64.MaxValue;
 	}
 
-	public List<UInt64> GetDigets(){
+	public List<UInt64> GetDigits(){
 		return new List<UInt64> (digits);
 	}
 
