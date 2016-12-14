@@ -21,7 +21,7 @@ public class AbsurdInt{
 		return digits [0];
 	}
 
-	public UInt64 GetDigitMax(){
+	public static UInt64 GetDigitMax(){
 		return UInt64.MaxValue;
 	}
 
@@ -65,5 +65,14 @@ public class AbsurdInt{
 		}
 		return true;
 	}
+
+	public bool LessThanOrEqualTo(AbsurdInt comp){
+		return this.LessThan(comp) || this.EqualTo(comp);
+	}
+
+	public bool GreaterThanOrEqualTo(AbsurdInt comp){
+		return this.GreaterThan(comp) || this.EqualTo(comp);
+	}
+
 }
 
