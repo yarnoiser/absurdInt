@@ -74,5 +74,44 @@ public class AbsurdInt{
 		return this.GreaterThan(comp) || this.EqualTo(comp);
 	}
 
+	public AbsurdInt Copy(){
+		return AbsurdInt(digits);
+	}
+
+	private bool KeepAdding(AbsurdInt val, int index){
+		if (index >= digits.Count){
+			return false;
+		}
+
+		if (index >= val.digits.Count){
+			return false;
+		}
+
+		return true;
+	}
+
+	private bool AddDigits(AbsurdInt, val, bool overflow, int index){
+		UInt64 toOverflow = AbsurdInt.DigitMax() - digits[i];
+		bool newOverflow = false;
+
+		if(overflow){
+			if(1 > toOverflow){
+				digits[i] = 0;
+				newOverflow = true;
+			} else{
+				digits[i] ++;
+			}
+		}
+
+		toOverflow = AbsurdInt.DigitMax() - digits[i];
+		if (val.digits[i] > toOverflow){
+			digits[i] = val.digits[i] - toOverflow;
+			newOverflow = true;
+		} else{
+			digits[i] += val.digits[i];
+		}
+
+		return newOverflow;
+	}
 }
 
