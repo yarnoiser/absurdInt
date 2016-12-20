@@ -78,40 +78,48 @@ public class AbsurdInt{
 		return AbsurdInt(digits);
 	}
 
-	private bool KeepAdding(AbsurdInt val, int index){
-		if (index >= digits.Count){
-			return false;
+	private static bool AddDigits(UInt64 digit1, UInt64 digit2, bool overflow){
+		bool newOverflow = false;
+		UInt64 toOverflow = AbsurdInt.DigitMax() - digit1;
+		UInt64 result;
+
+		if (digit2 > toOverflow){
+			newOverflow = true;
+			result = digit2 - toOverflow;
+		} else{
+			result = digit1 + digit2;
 		}
 
-		if (index >= val.digits.Count){
-			return false;
+		toOverflow = AbsurdInt.DigitMax() - result;
+
+		if (toOverflow < 1){
+			newOverflow = true;
+			result = 0;
+		} else{
+			result ++;
 		}
 
-		return true;
+		return Tuple.Create(result, newOverflow);
 	}
 
-	private bool AddDigits(AbsurdInt, val, bool overflow, int index){
-		UInt64 toOverflow = AbsurdInt.DigitMax() - digits[i];
-		bool newOverflow = false;
-
-		if(overflow){
-			if(1 > toOverflow){
-				digits[i] = 0;
-				newOverflow = true;
-			} else{
-				digits[i] ++;
+	public AbsurdInt Add(AbsurdInt val){
+		AbsurdInt result = new AbsurdInt();
+		bool overflow = false;
+		for(int i = 0; i < digits.Count; i++){
+			if (i >= val.digits.Count){
+				if (overflow){
+					result.digits.Add(1);
+				}
+				break;
 			}
+			Tuple digit = AddDigits(digits[i], val.digits[i], overflow);
+			result.Add(digit.Value1);
+			overflow = digit.Value2;
 		}
-
-		toOverflow = AbsurdInt.DigitMax() - digits[i];
-		if (val.digits[i] > toOverflow){
-			digits[i] = val.digits[i] - toOverflow;
-			newOverflow = true;
-		} else{
-			digits[i] += val.digits[i];
+		if (overflow){
+			result.digits.Add(1);
 		}
-
-		return newOverflow;
+		return result;
 	}
 }
 
