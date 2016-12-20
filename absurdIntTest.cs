@@ -15,8 +15,8 @@ public class AbsurdIntTest{
 		AbsurdInt test3 = new AbsurdInt(new UInt64[] {512, 1});
 		System.Console.WriteLine(test3);
 		
-		System.Console.WriteLine("GetDigitMax: (expect 18446744073709551615)");
-                System.Console.WriteLine(AbsurdInt.GetDigitMax());
+		System.Console.WriteLine("DigitMax: (expect 18446744073709551615)");
+                System.Console.WriteLine(AbsurdInt.DigitMax());
 		
 		System.Console.WriteLine("ToULong: (expect 512)");
 		System.Console.WriteLine(test3.ToULong());
@@ -79,6 +79,8 @@ public class AbsurdIntTest{
 		System.Console.WriteLine("GreaterThanOrEqualTo Expect true");
 		System.Console.WriteLine(test5.GreaterThanOrEqualTo(test6));
 
+		System.Console.WriteLine("ToString: Expect 100, 23, 9, 7, 4");
+		System.Console.WriteLine(test6.ToString());
 
 	}
 }

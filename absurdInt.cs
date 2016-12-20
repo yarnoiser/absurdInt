@@ -21,8 +21,19 @@ public class AbsurdInt{
 		return digits [0];
 	}
 
-	public static UInt64 GetDigitMax(){
+	public static UInt64 DigitMax(){
 		return UInt64.MaxValue;
+	}
+
+	public override string ToString(){
+		string result = "";
+		for(int i = 0; i < digits.Count; i++){
+			result += digits[i].ToString();
+			if (i != digits.Count - 1){
+				result += ", ";
+			}
+		}
+		return result;
 	}
 
 	public List<UInt64> GetDigits(){
@@ -75,10 +86,10 @@ public class AbsurdInt{
 	}
 
 	public AbsurdInt Copy(){
-		return AbsurdInt(digits);
+		return new AbsurdInt(digits);
 	}
 
-	private static bool AddDigits(UInt64 digit1, UInt64 digit2, bool overflow){
+	private static Tuple<UInt64, bool> AddDigits(UInt64 digit1, UInt64 digit2, bool overflow){
 		bool newOverflow = false;
 		UInt64 toOverflow = AbsurdInt.DigitMax() - digit1;
 		UInt64 result;
@@ -112,9 +123,9 @@ public class AbsurdInt{
 				}
 				break;
 			}
-			Tuple digit = AddDigits(digits[i], val.digits[i], overflow);
-			result.Add(digit.Value1);
-			overflow = digit.Value2;
+			Tuple<UInt64, bool> digit = AddDigits(digits[i], val.digits[i], overflow);
+			result.digits.Add(digit.Item1);
+			overflow = digit.Item2;
 		}
 		if (overflow){
 			result.digits.Add(1);
