@@ -96,20 +96,21 @@ public class AbsurdInt{
 
 		if (digit2 > toOverflow){
 			newOverflow = true;
-			result = digit2 - toOverflow;
+			result = digit2 - toOverflow - 1;
 		} else{
 			result = digit1 + digit2;
 		}
 
 		toOverflow = AbsurdInt.DigitMax() - result;
 
-		if (toOverflow < 1){
-			newOverflow = true;
-			result = 0;
-		} else{
-			result ++;
+		if (overflow){
+			if (toOverflow < 1){
+				newOverflow = true;
+				result = 0;
+			} else{
+				result ++;
+			}
 		}
-
 		return Tuple.Create(result, newOverflow);
 	}
 
@@ -132,5 +133,11 @@ public class AbsurdInt{
 		}
 		return result;
 	}
+
+	public AbsurdInt Add(UInt64 val){
+		return this.Add(new AbsurdInt(val));
+	}
+
+
 }
 

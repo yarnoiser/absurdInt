@@ -82,6 +82,17 @@ public class AbsurdIntTest{
 		System.Console.WriteLine("ToString: Expect 100, 23, 9, 7, 4");
 		System.Console.WriteLine(test6.ToString());
 
+		System.Console.WriteLine("Add: Expect 11");
+		AbsurdInt test7 = new AbsurdInt(5);
+		System.Console.WriteLine(test7.Add(6).ToString());
+
+		System.Console.WriteLine("Add: Expect 0, 1");
+		AbsurdInt test8 = new AbsurdInt(AbsurdInt.DigitMax());
+		System.Console.WriteLine(test8.Add(1).ToString());
+
+		System.Console.WriteLine("Add: Expect 11, 1");
+		System.Console.WriteLine(test8.Add(12).ToString());
+
 	}
 }
 
