@@ -93,6 +93,9 @@ public class AbsurdIntTest{
 		System.Console.WriteLine("Add: Expect 11, 1");
 		System.Console.WriteLine(test8.Add(12).ToString());
 
+		System.Console.WriteLine("Add: Expect 0, 1, 1");
+		AbsurdInt test9 = new AbsurdInt(new UInt64[] {AbsurdInt.DigitMax() / 2 + 1, AbsurdInt.DigitMax() / 2 + 1});
+		System.Console.WriteLine(test9.Add(test9).ToString());
 	}
 }
 
