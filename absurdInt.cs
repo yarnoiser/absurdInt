@@ -138,6 +138,23 @@ public class AbsurdInt{
 		return this.Add(new AbsurdInt(val));
 	}
 
+	private static Tuple<UInt64, bool> SubDigits(Uint64 digit1, Uint64 digit2, bool underflow){
+		bool newUnderflow = false;
+		if (underflow){
+			if (digit1 > 0){
+				digit1 -= 1;
+			} else{
+				digit1 = AbsurdInt.DigitMax();a
+				newUnderflow = true;
+			}
+		}
+		if (digit1 >= digit2){
+			return Tuple.Create(digit1 - digit2, newUnderflow);
+		} else{
+			return Tuple.Create(AbsurdInt.DigitMax() - digit2 + digit1, true);
+		}
+	}
+
 
 }
 
